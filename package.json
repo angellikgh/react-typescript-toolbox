@@ -1,0 +1,219 @@
+{
+    "name": "react-typescript-toolbox",
+    "displayName": "React Typescript Toolbox",
+    "description": "Helpful toolbox for React Web Applications with Typescript",
+    "version": "1.7.0",
+    "publisher": "svenliebig",
+    "icon": "images/logo.png",
+    "engines": {
+        "vscode": "^1.16.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "React",
+        "TypeScript",
+        "Generate",
+        "Component",
+        "Test"
+    ],
+    "bugs": {
+        "url": "https://github.com/Sly321/react-typescript-toolbox/issues",
+        "email": "liebigsv@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Sly321/react-typescript-toolbox.git"
+    },
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "reactTypeScriptToolbox.generateComponent",
+                "title": "Generate Component"
+            },
+            {
+                "command": "reactTypeScriptToolbox.generateModel",
+                "title": "Generate Model"
+            },
+            {
+                "command": "reactTypeScriptToolbox.generateEnum",
+                "title": "Generate Enum"
+            },
+            {
+                "command": "reactTypeScriptToolbox.generateIndex",
+                "title": "Generate Index"
+            },
+            {
+                "command": "reactTypeScriptToolbox.generateContext",
+                "title": "Generate Context (Experimental)"
+            }
+        ],
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "reactTypeScriptToolbox.generateComponent",
+                    "when": "false"
+                },
+                {
+                    "command": "reactTypeScriptToolbox.generateModel",
+                    "when": "false"
+                },
+                {
+                    "command": "reactTypeScriptToolbox.generateEnum",
+                    "when": "false"
+                },
+                {
+                    "command": "reactTypeScriptToolbox.generateIndex",
+                    "when": "false"
+                },
+                {
+                    "command": "reactTypeScriptToolbox.generateContext",
+                    "when": "false"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "reactTypeScriptToolbox.generateComponent",
+                    "group": "ReactTypeScriptToolbox",
+                    "when": "explorerResourceIsFolder"
+                },
+                {
+                    "command": "reactTypeScriptToolbox.generateModel",
+                    "group": "ReactTypeScriptToolbox",
+                    "when": "explorerResourceIsFolder"
+                },
+                {
+                    "command": "reactTypeScriptToolbox.generateEnum",
+                    "group": "ReactTypeScriptToolbox",
+                    "when": "explorerResourceIsFolder"
+                },
+                {
+                    "command": "reactTypeScriptToolbox.generateIndex",
+                    "group": "ReactTypeScriptToolbox",
+                    "when": "explorerResourceIsFolder"
+                },
+                {
+                    "command": "reactTypeScriptToolbox.generateContext",
+                    "group": "ReactTypeScriptToolbox",
+                    "when": "explorerResourceIsFolder"
+                }
+            ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "React TypeScript Toolbox Configuration",
+            "properties": {
+                "reactTypeScriptToolbox.stylesheet": {
+                    "type": "string",
+                    "default": "none",
+                    "enum": [
+                        "none",
+                        "less",
+                        "css",
+                        "sass",
+                        "scss"
+                    ],
+                    "enumDescriptions": [
+                        "Generates no stylesheet to the component",
+                        "Generates a less stylesheet to the component",
+                        "Generates a css stylesheet to the component",
+                        "Generates a sass stylesheet to the component",
+                        "Generates a scss stylesheet to the component"
+                    ],
+                    "description": "Select the type of stylesheet the will be generated, or none."
+                },
+                "reactTypeScriptToolbox.test": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Indicates if a test should be generated or not."
+                },
+                "reactTypeScriptToolbox.removeSemicolonsFromImportsOnSave": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If true, this will remove the semicolons from imports in .ts / .tsx files when the file is saved. (This is experimental for now)"
+                },
+                "reactTypeScriptToolbox.testFolder": {
+                    "type": "string",
+                    "default": "same",
+                    "description": "(same | flat | structured) - select the folder to create the test file. 'same' - The same folder as the created file | 'flat' - searchs for a 'test' folder under the workspace root (doesn't support multi workspace, it takes the first workspace) and creates the testfile flat into the folder | 'structured' - searches for a test folder in the workspace root and creates the same folder structure as the created file, if the file 'mynewcomponet' is created in 'src/components/mynewcomponet' then the test will be created in 'test/components/'."
+                },
+                "reactTypeScriptToolbox.sortIndex": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Indicates if the root index will be sorted or not."
+                },
+                "reactTypeScriptToolbox.indentation": {
+                    "type": "string",
+                    "default": "spaces",
+                    "description": "(tabs | spaces) - Select the indentation, spaces or tabs."
+                },
+                "reactTypeScriptToolbox.regexCheck": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "If your classname is check by regex (^[A-Z][A-Za-z]*$), checkout on http://regexr.com/3gngl."
+                },
+                "reactTypeScriptToolbox.semicolons": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Decide if you want to add semicolons to your generated files or not."
+                },
+                "reactTypeScriptToolbox.quotemarksString": {
+                    "type": "string",
+                    "default": "double",
+                    "enum": [
+                        "double",
+                        "single",
+                        "back-tick"
+                    ],
+                    "enumDescriptions": [
+                        "Uses double quotemarks (\") for strings in the generated files",
+                        "Uses single quotemarks (') for strings in the generated files",
+                        "Uses backticks (`) for strings in the generated files"
+                    ],
+                    "description": "Choose the quotemarks you want to use for strings the generated files."
+                },
+                "reactTypeScriptToolbox.quotemarksImportExport": {
+                    "type": "string",
+                    "default": "double",
+                    "enum": [
+                        "double",
+                        "single"
+                    ],
+                    "enumDescriptions": [
+                        "Uses double quotemarks (\") for the Imports and Exports in generated files",
+                        "Uses single quotemarks (') for the Imports and Exports in generated files"
+                    ],
+                    "description": "Choose the quotemarks you want to use for Imports and Exports in the generated files."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test",
+        "publish": "vsce publish",
+        "patch": "vsce publish patch",
+        "minor": "vsce publish minor",
+        "major": "vsce publish major"
+    },
+    "devDependencies": {
+        "@types/mocha": "2.2.48",
+        "@types/node": "9.4.7",
+        "mocha": "5.0.4",
+        "typescript": "^3.2.2",
+        "vscode": "1.1.13"
+    },
+    "dependencies": {
+        "fs": "^0.0.1-security",
+        "mkdirp": "^0.5.1",
+        "vsce": "^1.30.0"
+    }
+}
